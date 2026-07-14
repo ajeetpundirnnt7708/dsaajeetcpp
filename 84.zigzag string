@@ -1,0 +1,36 @@
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        // Edge case: if numRows is 1 or greater than/equal to string length, 
+        // the zigzag pattern doesn't change the string structure.
+        if (numRows <= 1 || numRows >= s.length()) {
+            return s;
+        }
+
+        // Create a vector of strings for each row
+        vector<string> rows(min(numRows, (int)s.length()));
+        int currentRow = 0;
+        bool goingDown = false;
+
+        // Iterate through each character in the string
+        for (char c : s) {
+            rows[currentRow] += c;
+            
+            // Turn around if we hit the top or bottom row
+            if (currentRow == 0 || currentRow == numRows - 1) {
+                goingDown = !goingDown;
+            }
+            
+            // Move up or down depending on the direction
+            currentRow += goingDown ? 1 : -1;
+        }
+
+        // Combine all rows into a single string
+        string result = "";
+        for (const string& row : rows) {
+            result += row;
+        }
+
+        return result;
+    }
+};
