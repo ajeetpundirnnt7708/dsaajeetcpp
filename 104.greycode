@@ -1,0 +1,18 @@
+#include <vector>
+
+class Solution {
+public:
+    std::vector<int> grayCode(int n) {
+        // Total elements in an n-bit sequence is 2^n
+        int totalElements = 1 << n;
+        std::vector<int> result;
+        result.reserve(totalElements); // Pre-allocate memory to prevent reallocations
+        
+        // Generate each Gray code sequence using: i ^ (i >> 1)
+        for (int i = 0; i < totalElements; ++i) {
+            result.push_back(i ^ (i >> 1));
+        }
+        
+        return result;
+    }
+};
